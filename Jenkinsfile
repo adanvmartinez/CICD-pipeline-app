@@ -1,3 +1,6 @@
+
+//Author: Adan Martinez
+//Thus automates deployment of infrastructure using Jenkins.
 pipeline{
     agent any
     
@@ -13,10 +16,34 @@ pipeline{
         //     }
         // }
 
+        //Runs unit test apps
         stage("Test App"){
             steps{
                 sh 'echo python3 app/testadan.py app/testindex.py'
                 echo 'Ran tests...'
+            }
+        }
+        //Checks for any formatting errors in terreform syntax
+        stage('Terraform Format Check') {
+            steps{
+                sh 'terraform fmt'
+            }
+        }
+        //Initializes terraform files
+        stage('Terraform Init') {
+            steps{
+                sh 'terraform init'
+            }
+        }
+        //Make sure we have access to AWS and start terraform planning
+        stage('Check AWS Credentials/Terraform Plan'){
+            steps{
+                withAWS(credentials:'jenkins-test-app-credentials',region:'us-west-1'){
+                    sh 'aws iam list-users'
+                    sh 'terraform plan -input=false -out tfplan'
+                    sh 'terraform show -no-color tfplan > tfplan.txt'
+                    
+                }
             }
         }
     }
