@@ -35,6 +35,12 @@ pipeline{
                 sh 'terraform init'
             }
         }
+        //Validate scripts
+        stage('Terraform Validate') {
+            steps{
+                sh 'terraform validate'
+            }
+        }
         //Make sure we have access to AWS and start terraform planning
         stage('Terraform Plan'){
             steps{
