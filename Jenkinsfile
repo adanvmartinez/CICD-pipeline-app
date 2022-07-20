@@ -4,8 +4,10 @@ pipeline{
     stages{
         stage("Checkout Repo"){
             steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/adanvmartinez/python-unittest-app.git']]])
-                echo 'Checked out Repository...'
+                withCredentials(credentialsId:'github-api-token'){
+                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/adanvmartinez/python-unittest-app.git']]])
+                    echo 'Checked out Repository...'
+                }
             }
         }
     }
