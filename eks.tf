@@ -3,11 +3,11 @@ module "eks" {
     version = "~> 18.0"
     cluster_name = "terrafrom-lab-cluster"
     cluster_version = "1.22"
-    subnets = [aws_subnet.terrafrom-lab-subnet.id]
+    subnet_ids = [aws_subnet.terrafrom-lab-subnet.id]
 
     vpc_id = module.vpc.vpc_id
 
-    node_groups ={
+    eks_managed_node_groups ={
         desired_capacity = 3
         max_capacity = 3
         min_capacity = 3
