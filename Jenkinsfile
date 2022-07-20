@@ -48,8 +48,9 @@ pipeline{
                     //sh 'aws iam list-users'
                     sh 'terraform plan -input=false -out tfplan'
                     //sh 'terraform show -no-color tfplan > tfplan.txt'
-                    sh 'terraform apply' 
-                    sh 'yes'
+                    sh 'pwd'
+                    sh 'ls -a'
+                    sh 'terraform apply --auto-approve'
                     
                 }
             }
