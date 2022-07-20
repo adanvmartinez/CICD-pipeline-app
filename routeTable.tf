@@ -16,8 +16,14 @@ resource "aws_route_table" "terraform-lab-rt" {
 
 
 //Assigns the route table to the subnet in vpc
-resource "aws_route_table_association" "terraform-lab-subnet-association" {
-  subnet_id = aws_subnet.terraform-lab-subnet.id
+resource "aws_route_table_association" "terraform-lab-subnet1-association" {
+  subnet_id = aws_subnet.terraform-lab-subnet1.id
+  route_table_id = aws_route_table.terraform-lab-rt.id
+  
+}
+
+resource "aws_route_table_association" "terraform-lab-subnet2-association" {
+  subnet_id = aws_subnet.terraform-lab-subnet2.id
   route_table_id = aws_route_table.terraform-lab-rt.id
   
 }
