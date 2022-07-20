@@ -1,6 +1,6 @@
 module "eks" {
     source = "terraform-aws-modules/eks/aws"
-    version = "17.24.0"
+    version = "~> 18.0"
     cluster_name = "terrafrom-lab-cluster"
     cluster_version = "1.22"
     subnets = [aws_subnets.terrafrom-lab-subnet.id]
