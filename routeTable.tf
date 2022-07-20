@@ -3,7 +3,7 @@
 
 //Creation of route table
 resource "aws_route_table" "terraform-lab-rt" {
-    vpc_id = aws_vpc.terraform-lab-vpc.vpc_id
+    vpc_id = aws_vpc.terraform-lab-vpc.id
 
     route {
         cidr_block = "0.0.0.0/0"
