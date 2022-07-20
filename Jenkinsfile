@@ -42,12 +42,13 @@ pipeline{
             }
         }
         //Make sure we have access to AWS and start terraform planning
-        stage('Terraform Plan'){
+        stage('Terraform Apply'){
             steps{
                 withAWS(credentials:'jenkins-test-app-credentials',region:'us-west-1'){
                     //sh 'aws iam list-users'
-                    sh 'terraform plan -input=false -out tfplan'
+                    //sh 'terraform plan -input=false -out tfplan'
                     //sh 'terraform show -no-color tfplan > tfplan.txt'
+                    sh 'terraform apply'
                     
                 }
             }
