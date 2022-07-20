@@ -8,5 +8,6 @@ pipeline{
                 echo 'Checked out Repository...'
             }
         }
+    }
         
 }
