@@ -3,7 +3,7 @@ module "eks" {
     version = "~> 18.0"
     cluster_name = "terrafrom-lab-cluster"
     cluster_version = "1.22"
-    subnet_ids = [aws_subnet.terrafrom-lab-subnet.id]
+    subnet_ids = [aws_subnet.terraform-lab-subnet.id]
 
     vpc_id = aws_vpc.terraform-lab-vpc.id
 
