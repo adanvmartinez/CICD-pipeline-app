@@ -59,7 +59,7 @@ pipeline{
         stage('Deploy NGINx Image'){
             steps{
                 withAWS(credentials:'jenkins-aws-credentials',region:'us-west-1'){
-                   sh 'kubectl apply -f deployment.yml --context terrafrom-lab-cluster'
+                   sh 'kubectl apply -f deployment.yml'
                     
                 }
             }
