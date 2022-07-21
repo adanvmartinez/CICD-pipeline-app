@@ -58,8 +58,8 @@ pipeline{
         //Apply Kubernetes YML file to EKS
         stage('Deploy NGINx Image'){
             steps{
-                withAWS(credentials:'jenkins-test-app-credentials',region:'us-west-1'){
-                   sh 'kubectl apply -f deployment.yml --context terraform-lab-cluster'
+                withAWS(credentials:'jenkins-aws-credentials',region:'us-west-1'){
+                   sh 'kubectl apply -f deployment.yml --context terrafrom-lab-cluster'
                     
                 }
             }
