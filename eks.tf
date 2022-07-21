@@ -12,6 +12,11 @@ module "eks" {
         max_capacity = 3
         min_capacity = 3
     }
+    remote_access{
+        source_security_group_ids=[
+            aws_security_group.terraform_security_group.id
+        ]   
+    }
 }
 
 data "aws_eks_cluster" "cluster" {
