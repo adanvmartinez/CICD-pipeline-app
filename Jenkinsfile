@@ -55,7 +55,15 @@ pipeline{
                 }
             }
         }
-        
+        //Apply Kubernetes YML file to EKS
+        stage('Deploy NGINx Image'){
+            steps{
+                withAWS(credentials:'jenkins-test-app-credentials',region:'us-west-1'){
+                   sh 'kubectl apply -f /deployment.yml'
+                    
+                }
+            }
+        }
         //Destoy infra
         stage('Destoy'){
             steps{
