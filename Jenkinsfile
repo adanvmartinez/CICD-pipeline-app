@@ -59,7 +59,7 @@ pipeline{
         stage('Deploy NGINx Image'){
             steps{
                 withAWS(credentials:'jenkins-test-app-credentials',region:'us-west-1'){
-                   sh 'kubectl apply -f /deployment.yml'
+                   sh 'sudo kubectl apply -f /deployment.yml'
                     
                 }
             }
