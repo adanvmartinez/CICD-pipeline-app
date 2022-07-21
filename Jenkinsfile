@@ -60,10 +60,11 @@ pipeline{
             steps{
                 withAWS(credentials:'jenkins-aws-credentials',region:'us-west-1'){
                     //sh 'kubectl apply -f deployment.yml'
-                    sh 'aws eks --region us-west-1 update-kubeconfig --name terrafrom-lab-cluster'
-                    sh 'kubectl get pods --all-namespaces'
-                    sh 'kubectl config use-context arn:aws:eks:us-west-1:858952941568:cluster/terrafrom-lab-cluster'
-                    sh 'kubectl get pods --all-namespaces'
+                    //sh 'aws eks --region us-west-1 update-kubeconfig --name terrafrom-lab-cluster'
+                    //sh 'kubectl get pods --all-namespaces'
+                    //sh 'kubectl config use-context arn:aws:eks:us-west-1:858952941568:cluster/terrafrom-lab-cluster'
+                    //sh 'kubectl get pods --all-namespaces'
+                    sh 'kubectl apply -f deployment.yaml'
                 }
             }
         }
