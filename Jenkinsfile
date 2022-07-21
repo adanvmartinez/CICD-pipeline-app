@@ -64,7 +64,7 @@ pipeline{
                     //sh 'kubectl get pods --all-namespaces'
                     //sh 'kubectl config use-context arn:aws:eks:us-west-1:858952941568:cluster/terrafrom-lab-cluster'
                     //sh 'kubectl get pods --all-namespaces'
-                    sh 'kubectl apply -f deployment.yaml'
+                    sh 'kubectl apply -f deployment.yml'
                 }
             }
         }
