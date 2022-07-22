@@ -59,7 +59,7 @@ pipeline{
          stage('Build NGINX-APP Docker Image'){
              steps{
                  echo 'building docker image...'
-                 sh 'docker image rm python'
+                 sh 'docker image rm adan/python-app'
                  sh 'docker build . -t adan/python-app'
                  //sh 'docker run --rm -p 5000:5000 app:latest &'
                  //sh 'eval $(minikube -p minikube docker-env)'
