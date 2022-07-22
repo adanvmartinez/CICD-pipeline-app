@@ -9,6 +9,6 @@ spec:
     spec:
       containers:
       - name: python-app
-        image: adan/python-app
+        image: adanvmartinez/python-app
         imagePullPolicy: Never
       restartPolicy: Never
