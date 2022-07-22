@@ -62,8 +62,8 @@ pipeline{
                  sh 'docker build . -t adan/python-app'
                  //sh 'docker run --rm -p 5000:5000 app:latest &'
                  //sh 'eval $(minikube -p minikube docker-env)'
-                sh 'aws eks --region us-east-2 update-kubeconfig --name terraform-cluster'
-                sh 'kubectl create -f app.yml'
+                //sh 'aws eks --region us-east-2 update-kubeconfig --name terraform-cluster'
+                //sh 'kubectl create -f app.yml'
                  
              }
          }
