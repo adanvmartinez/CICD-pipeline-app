@@ -58,10 +58,10 @@ pipeline{
         //Build Docker image with the python app and nginx
          stage('Build NGINX-APP Docker Image'){
              steps{
-                 sh 'docker build . -t adan/python-app'
+                 //sh 'docker build . -t adan/python-app'
                  //sh 'docker run --rm -p 5000:5000 app:latest &'
-                 sh 'eval $(minikube -p minikube docker-env)'
-                 sh 'kubectl create -f app.yml'
+                 //sh 'eval $(minikube -p minikube docker-env)'
+                 //sh 'kubectl create -f app.yml'
              }
          }
 
@@ -70,26 +70,26 @@ pipeline{
             steps{
                 withAWS(credentials:'bhagwat-aws',region:'us-east-2'){
                     echo 'Deploying docker image...'
-                    // sh 'aws eks --region us-west-1 update-kubeconfig --name terraform-cluster'
-                    // sh 'kubectl get services'
-                    // sh 'kubectl delete services nginx-service'
+                    sh 'aws eks --region us-west-1 update-kubeconfig --name terraform-cluster'
+                    sh 'kubectl get services'
+                    sh 'kubectl delete services nginx-service'
 
 
-                    // sh 'kubectl get nodes'
-                    // sh 'kubectl get pods --all-namespaces'
-                    // sh 'kubectl apply -f deployment.yml'
-                    // sh 'kubectl get deployments python-unittest-app'
-                    // sh 'kubectl describe deployments python-unittest-app'
-                    // sh 'kubectl get replicasets'
-                    // sh 'kubectl describe replicasets'
+                    sh 'kubectl get nodes'
+                    sh 'kubectl get pods --all-namespaces'
+                    sh 'kubectl apply -f deployment.yml'
+                    sh 'kubectl get deployments python-unittest-app'
+                    sh 'kubectl describe deployments python-unittest-app'
+                    sh 'kubectl get replicasets'
+                    sh 'kubectl describe replicasets'
 
-                    // sh 'kubectl expose deployment python-unittest-app  --port=80 --target-port=80  --name=nginx-service --type=LoadBalancer'
+                    sh 'kubectl expose deployment python-unittest-app  --port=80 --target-port=80  --name=nginx-service --type=LoadBalancer'
 
-                    // sh 'kubectl get service nginx-service' 
-                    // sh 'kubectl describe service nginx-service'
+                    sh 'kubectl get service nginx-service' 
+                    sh 'kubectl describe service nginx-service'
 
-                    // sh 'kubectl get nodes'
-                    // sh 'kubectl get pods --output=wide'
+                    sh 'kubectl get nodes'
+                    sh 'kubectl get pods --output=wide'
 
                 }
             }
