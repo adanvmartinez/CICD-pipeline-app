@@ -75,7 +75,7 @@ pipeline{
                     echo 'Deploying docker image...'
                     sh 'aws eks --region us-east-2 update-kubeconfig --name terraform-cluster'
                     sh 'kubectl get services'
-                    sh 'kubectl delete services nginx-service'
+                    //sh 'kubectl delete services nginx-service'
 
 
                     sh 'kubectl get nodes'
