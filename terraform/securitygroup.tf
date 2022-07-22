@@ -5,7 +5,7 @@
 resource "aws_security_group" "terraform_security_group" {
   name = "teraform security group"
   description = "Allows inboud requests to terraform VPC"
-  vpc_id = aws_vpc.terraform-lab-vpc.id
+  vpc_id = aws_vpc.adan-terraform-vpc.id
   ingress  {
     description = "Inbound rule"
     from_port = 22
@@ -40,3 +40,10 @@ resource "aws_security_group" "terraform_security_group" {
     Name = "inbound_rules_for_terraform_vpc"
   }
 }
+
+#Crete ssh key
+# resource "aws_key_pair" "ssh_key" {
+#   key_name = "server-ssh-key"
+#   public_key = file("${var.ssh-key}")
+# }
+

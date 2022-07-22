@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cicd-app
+  name: python-unittest-app
 spec:
   selector:
     matchLabels:
-      app: cicd-app
+      run: python-unittest-app
   replicas: 3
   strategy: 
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: cicd-app
+        run: python-unittest-app
     spec:
       containers:
-      - name: cicd-app
-        image:  public.ecr.aws/nginx/nginx:1.21
+      - name: python-unittest-app
+        image: nginx
         resources:
           limits:
             memory: "128Mi"
