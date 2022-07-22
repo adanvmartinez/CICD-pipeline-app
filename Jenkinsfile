@@ -50,7 +50,7 @@ pipeline{
                     //sh 'terraform show -no-color tfplan > tfplan.txt'
                     sh 'pwd'
                     sh 'ls -a'
-                    sh 'terraform apply --auto-approve'
+                    //sh 'terraform apply --auto-approve'
                     }
                 }
             }
@@ -69,29 +69,27 @@ pipeline{
         stage('Deploy NGINx Image'){
             steps{
                 withAWS(credentials:'bhagwat-aws',region:'us-east-2'){
-                    //sh 'kubectl apply -f deployment.yml'
-                    sh 'aws eks --region us-west-1 update-kubeconfig --name terraform-cluster'
-                    //sh 'kubectl get pods --all-namespaces'
-                    //sh 'kubectl config use-context arn:aws:eks:us-west-1:858952941568:cluster/terrafrom-lab-cluster'
-                    sh 'kubectl get services'
-                    sh 'kubectl delete services nginx-service'
+                    echo 'Deploying docker image...'
+                    // sh 'aws eks --region us-west-1 update-kubeconfig --name terraform-cluster'
+                    // sh 'kubectl get services'
+                    // sh 'kubectl delete services nginx-service'
 
 
-                    sh 'kubectl get nodes'
-                    sh 'kubectl get pods --all-namespaces'
-                    sh 'kubectl apply -f deployment.yml'
-                    sh 'kubectl get deployments python-unittest-app'
-                    sh 'kubectl describe deployments python-unittest-app'
-                    sh 'kubectl get replicasets'
-                    sh 'kubectl describe replicasets'
+                    // sh 'kubectl get nodes'
+                    // sh 'kubectl get pods --all-namespaces'
+                    // sh 'kubectl apply -f deployment.yml'
+                    // sh 'kubectl get deployments python-unittest-app'
+                    // sh 'kubectl describe deployments python-unittest-app'
+                    // sh 'kubectl get replicasets'
+                    // sh 'kubectl describe replicasets'
 
-                    sh 'kubectl expose deployment python-unittest-app  --port=80 --target-port=80  --name=nginx-service --type=LoadBalancer'
+                    // sh 'kubectl expose deployment python-unittest-app  --port=80 --target-port=80  --name=nginx-service --type=LoadBalancer'
 
-                    sh 'kubectl get service nginx-service' 
-                    sh 'kubectl describe service nginx-service'
+                    // sh 'kubectl get service nginx-service' 
+                    // sh 'kubectl describe service nginx-service'
 
-                    sh 'kubectl get nodes'
-                    sh 'kubectl get pods --output=wide'
+                    // sh 'kubectl get nodes'
+                    // sh 'kubectl get pods --output=wide'
 
                 }
             }
