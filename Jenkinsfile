@@ -42,7 +42,7 @@ pipeline{
         //Make sure we have access to AWS and start terraform planning
         stage('Terraform Plan and Apply'){
             steps{
-                withAWS(credentials:'jenkins-test-app-credentials',region:'us-west-1'){
+                withAWS(credentials:'bhagwat-aws',region:'us-east-2'){
                     dir('terraform'){
                     sh 'pwd'
                     sh 'aws iam list-users'
@@ -68,7 +68,7 @@ pipeline{
         //Apply Kubernetes YML file to EKS
         stage('Deploy NGINx Image'){
             steps{
-                withAWS(credentials:'jenkins-aws-credentials',region:'us-west-1'){
+                withAWS(credentials:'bhagwat-aws',region:'us-east-2'){
                     //sh 'kubectl apply -f deployment.yml'
                     sh 'aws eks --region us-west-1 update-kubeconfig --name terraform-cluster'
                     //sh 'kubectl get pods --all-namespaces'
@@ -99,10 +99,10 @@ pipeline{
         //Destoy infra
         stage('Destroy'){
             steps{
-                withAWS(credentials:'jenkins-test-app-credentials',region:'us-west-1'){
+                withAWS(credentials:'bhagwat-aws',region:'us-east-2'){
                     dir('terraform'){
                         echo 'Destroy Stage'
-                        sh 'terraform destroy --auto-approve'
+                        //sh 'terraform destroy --auto-approve'
                     }
                     
                 }
