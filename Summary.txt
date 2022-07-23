@@ -1,0 +1,4 @@
+
+We first started working on creating terrraform scripts to create VPC, cluster, nodes, and other components.
+We divided the work on creating these terraform files. We each took different components and once done pushed int to github.
+We used terraform registery while creating terrafom file to see the examples and documentations on how to implement in AWS.
