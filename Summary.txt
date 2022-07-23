@@ -2,3 +2,70 @@
 We first started working on creating terrraform scripts to create VPC, cluster, nodes, and other components.
 We divided the work on creating these terraform files. We each took different components and once done pushed int to github.
 We used terraform registery while creating terrafom file to see the examples and documentations on how to implement in AWS.
+We also created .yml files, DockerFile, and simple python app to build the docker image and host the app online.
+
+
+We logged in to jenkins and configured few things first before we build our cluster. First we configured the aws credentials in jenkins manage plugin page.
+Then we made sure the terraform is installed for jenkins to use.
+After the pipeline job was created we configured it with github. Wer added all the credentials and github url when we build it uses the jenkins file from github.
+
+Steps we followed to create jenkins pipeline
+
+stage 1:
+We first ran a simple python test app to see if the the pipeline is configured correctly or not.
+
+stage 2:
+Then we did terraform format check to see if the jenkins file is running the correct terraform format. We used the following steps to check that
+dir('terraform') {
+    sh 'pwd'
+    sh 'terraform fmt'
+}
+
+stage 3:
+In this stage we use terraform init to initialize a working directory that has all the configuration files needed for terraform Script.
+steps:
+dir('terraform'){
+    sh 'pwd'
+    sh 'terraform init'
+}
+
+stage 4:
+In this stage we use terraform validate command to validate all the terraform configuration files in the given directory. The steps we used to do that:
+dir('terraform'){
+    sh 'pwd'
+    sh 'terraform validate'
+}
+
+stage 5:
+In this stage we used terraform plan and terraform apply to build the cluster. We first create the plan to see if everything is good to go. 
+Then We used terraform apply to create the cluster. Also, we specified which aws credentials we want to use. Steps we took:
+withAWS(credentials:'bhagwat-aws',region:'us-east-2'){
+    dir('terraform'){
+        sh 'pwd'
+        sh 'aws iam list-users'
+        sh 'terraform plan -input=false -out tfplan'
+        //sh 'terraform show -no-color tfplan > tfplan.txt'
+        sh 'pwd'
+        sh 'ls -a'
+        sh 'terraform apply --auto-approve'
+    }
+}
+
+Stage 6:
+In this stage we build the docker image from the simple python app we created. We were able to build the image with no problem but couldn't push it to cluster because docker disn't accept the aws credentials.
+steps we took:
+echo 'building docker image...'
+sh 'docker image rm adan/python-app'
+sh 'docker build . -t adan/python-app:python-app'
+
+
+
+What went well and what didn't:
+
+Writing the terraform script went as well as it should. We were able to connect github repo with jenkins with very little peoblems.
+We had few problems creating the cluster like correct IAm roles, correct credentials, choosing right vpc and subnets. But we successfully created the aws cluster.
+We had issue with kubectl compatibility and took a long to to get it working. We had to lot of research on how to fix the problem and tried multiple solutions so it took us hours before we finally get it working.
+We were able to deploy nginix image we found in public repo and host the nginix welcome page in our cluster.
+
+The main problem we have right now is that we cannot push the docker image of the app we created. We were able to successfully create docker image from out app.
+But when we try to deploy it to the cluster using "kubectl apply -f app.yml" we get the "aws credentials error". We have credentials correctly set up but docker doesn't seem to accept those credentials.
